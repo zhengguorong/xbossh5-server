@@ -15,6 +15,26 @@ export default (appInfo: EggAppInfo) => {
     sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,
   };
 
+  config.mongoose = {
+    url: 'mongodb://127.0.0.1/xbossh5',
+    options: { useUnifiedTopology: true },
+  };
+
+  config.jwtSecret = 'xbossh5';
+
+  config.onerror = {
+    json(err, ctx) {
+      ctx.sattus = 400;
+      ctx.body = err;
+    },
+  };
+
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+  };
+
   // the return config will combines to EggAppConfig
   return {
     ...config,
